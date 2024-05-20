@@ -16,8 +16,6 @@
 
 int	print_c(char arg)
 {
-	if (arg == 0)
-		return (1);
 	write(1, &arg, 1);
 	return (1);
 }
