@@ -2,15 +2,15 @@
 
 This repository contains my implementation of the ft\_printf project from the 42 cursus. The goal is to replicate the behavior of the `printf()` function from the standard C library `stdio.h`.
 
-\<h2 align="center"\>
-\<a href="\#about-the-project"\>About the project\</a\>
-\<span\> · \</span\>
-\<a href="\#index"\>Index\</a\>
-\<span\> · \</span\>
-\<a href="\#requirements"\>Requirements\</a\>
-\<span\> · \</span\>
-\<a href="\#instructions"\>Instructions\</a\>
-\</h2\>
+<h2 align="center"\>
+<a href="\#about-the-project"\>About the project\</a\>
+<span\> · \</span\>
+<a href="\#index"\>Index\</a\>
+<span\> · \</span\>
+<a href="\#requirements"\>Requirements\</a\>
+<span\> · \</span\>
+<a href="\#instructions"\>Instructions\</a\>
+</h2\>
 
 ## About the project
 
