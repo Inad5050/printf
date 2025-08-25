@@ -11,17 +11,13 @@ Este repositorio contiene mi implementación del proyecto ft_printf del cursus d
     <span> · </span>
     <a href="#instrucciones">Instrucciones</a>
 </h2>
-Sobre el proyecto
+## Sobre el proyecto
 
 Este proyecto consiste en crear una librería con una función, ft_printf, que imita el funcionamiento original de printf. No es necesario implementar la gestión del búfer. La función debe manejar los siguientes especificadores de formato:
-
-    %c: Para imprimir un solo carácter.
-
-    %s: Para imprimir una cadena de caracteres.
-
-    %p: Para imprimir la dirección de un puntero en formato hexadecimal.
-
-    %d: Para imprimir un número decimal (base 10).
+* %c: Para imprimir un solo carácter.
+* %s: Para imprimir una cadena de caracteres.
+* %p: Para imprimir la dirección de un puntero en formato hexadecimal.
+* %d: Para imprimir un número decimal (base 10).
 
     %i: Para imprimir un entero en base 10.
 
@@ -33,30 +29,21 @@ Este proyecto consiste en crear una librería con una función, ft_printf, que i
 
     %%: Para imprimir el símbolo de porcentaje.
 
-Puedes encontrar más detalles en el enunciado oficial del proyecto.
-Índice
-
-    Estructura
-
-    Funciones principales
-
-    Funciones auxiliares
-
-Estructura
+## Estructura
 
 El principal desafío del proyecto es la gestión de un número variable de argumentos. Para ello, se han utilizado las macros de la librería <stdarg.h>: va_list, va_start, va_arg y va_end.
 
 El flujo del programa es el siguiente:
 
-    La función ft_printf recorre la cadena de formato.
+* La función ft_printf recorre la cadena de formato.
 
-    Cuando encuentra un carácter %, llama a la función selection.
+Cuando encuentra un carácter %, llama a la función selection.
 
-    selection determina qué tipo de dato se debe imprimir basándose en el carácter que sigue al % y llama a la función de impresión correspondiente (por ejemplo, print_c para %c).
+selection determina qué tipo de dato se debe imprimir basándose en el carácter que sigue al % y llama a la función de impresión correspondiente (por ejemplo, print_c para %c).
 
-    Cada función de impresión se encarga de escribir el argumento correspondiente en la salida estándar y devuelve el número de caracteres impresos.
+Cada función de impresión se encarga de escribir el argumento correspondiente en la salida estándar y devuelve el número de caracteres impresos.
 
-Funciones principales
+## Funciones principales
 
 El archivo printer.c contiene las funciones encargadas de gestionar cada tipo de formato:
 
@@ -68,7 +55,7 @@ El archivo printer.c contiene las funciones encargadas de gestionar cada tipo de
 
     print_x(size_t arg, char format, int count): Imprime un número en formato hexadecimal, ya sea en minúsculas (x), mayúsculas (X) o como parte de un puntero (p). Es una función recursiva que construye el número y devuelve el número de caracteres hexadecimales impresos.
 
-Funciones auxiliares
+## Funciones auxiliares
 
 El archivo auxiliars.c contiene las funciones de apoyo para la impresión de números:
 
@@ -76,7 +63,7 @@ El archivo auxiliars.c contiene las funciones de apoyo para la impresión de nú
 
     putnbr_alt_u(unsigned int n, int count): Función recursiva que imprime un número entero sin signo (unsigned int). Devuelve el número de caracteres impresos.
 
-Requisitos
+## Requisitos
 
 Para compilar y utilizar esta librería, necesitarás:
 
@@ -84,7 +71,7 @@ Para compilar y utilizar esta librería, necesitarás:
 
     Las librerías estándar <unistd.h>, <stdlib.h> y <stdarg.h>.
 
-Instrucciones
+## Instrucciones
 1. Compilar la librería
 
 Para compilar los archivos y crear la librería libftprintf.a, clona el repositorio, navega hasta su directorio y ejecuta:
