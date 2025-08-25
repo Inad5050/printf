@@ -91,17 +91,12 @@ $ make re
 
 Para utilizar ft_printf en tus propios proyectos, incluye el archivo de cabecera ft_printf.h y enlaza la librería libftprintf.a durante la compilación.
 
-#include "ft_printf.h"
-
-int main(void)
-
-{
-
-    ft_printf("Hola, %s! Tienes %d mensajes.\n", "mundo", 5);
-    
-    return (0);
-    
-}
+    #include "ft_printf.h"
+    int main(void)
+    {
+        ft_printf("Hola, %s! Tienes %d mensajes.\n", "mundo", 5);    
+        return (0);    
+    }
 
 #### Compilación de ejemplo:
 
