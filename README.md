@@ -1,100 +1,104 @@
-<h1 align="center">ft_printf | 42 School Project</h1>
+\<h1 align="center"\>ft\_printf | 42 School Project\</h1\>
 
-Este repositorio contiene mi implementación del proyecto ft_printf del cursus de 42. El objetivo es replicar el comportamiento de la función printf() de la librería estándar de C stdio.h.
+This repository contains my implementation of the ft\_printf project from the 42 cursus. The goal is to replicate the behavior of the `printf()` function from the standard C library `stdio.h`.
 
-<h2 align="center">
-    <a href="#sobre-el-proyecto">Sobre el proyecto</a>
-    <span> · </span>
-    <a href="#índice">Índice</a>
-    <span> · </span>
-    <a href="#requisitos">Requisitos</a>
-    <span> · </span>
-    <a href="#instrucciones">Instrucciones</a>
-</h2>
+\<h2 align="center"\>
+\<a href="\#about-the-project"\>About the project\</a\>
+\<span\> · \</span\>
+\<a href="\#index"\>Index\</a\>
+\<span\> · \</span\>
+\<a href="\#requirements"\>Requirements\</a\>
+\<span\> · \</span\>
+\<a href="\#instructions"\>Instructions\</a\>
+\</h2\>
 
-## Sobre el proyecto
+## About the project
 
-Este proyecto consiste en crear una librería con una función, ft_printf, que imita el funcionamiento original de printf. No es necesario implementar la gestión del búfer. La función debe manejar los siguientes especificadores de formato:
-* %c: Para imprimir un solo carácter.
-* %s: Para imprimir una cadena de caracteres.
-* %p: Para imprimir la dirección de un puntero en formato hexadecimal.
-* %d: Para imprimir un número decimal (base 10).
-* %i: Para imprimir un entero en base 10.
-* %u: Para imprimir un número decimal sin signo (base 10).
-* %x: Para imprimir un número en formato hexadecimal (minúsculas).
-* %X: Para imprimir un número en formato hexadecimal (mayúsculas).
-* %%: Para imprimir el símbolo de porcentaje.
+This project consists of creating a library with a function, `ft_printf`, that mimics the original behavior of `printf`. It is not necessary to implement buffer management. The function must handle the following format specifiers:
 
-## Estructura
+  * `%c`: To print a single character.
+  * `%s`: To print a string of characters.
+  * `%p`: To print the address of a pointer in hexadecimal format.
+  * `%d`: To print a decimal number (base 10).
+  * `%i`: To print an integer in base 10.
+  * `%u`: To print an unsigned decimal number (base 10).
+  * `%x`: To print a number in hexadecimal format (lowercase).
+  * `%X`: To print a number in hexadecimal format (uppercase).
+  * `%%`: To print the percentage symbol.
 
-El principal desafío del proyecto es la gestión de un número variable de argumentos. Para ello, se han utilizado las macros de la librería <stdarg.h>: va_list, va_start, va_arg y va_end.
+## Structure
 
-El flujo del programa es el siguiente:
+The main challenge of the project is managing a variable number of arguments. For this, the macros from the `<stdarg.h>` library have been used: `va_list`, `va_start`, `va_arg`, and `va_end`.
 
-* La función ft_printf recorre la cadena de formato.
+The program flow is as follows:
 
-* Cuando encuentra un carácter %, llama a la función selection.
+  * The `ft_printf` function iterates through the format string.
 
-* Selection determina qué tipo de dato se debe imprimir basándose en el carácter que sigue al % y llama a la función de impresión correspondiente (por ejemplo, print_c para %c).
+  * When it finds a `%` character, it calls the `selection` function.
 
-* Cada función de impresión se encarga de escribir el argumento correspondiente en la salida estándar y devuelve el número de caracteres impresos.
+  * `selection` determines what type of data should be printed based on the character following the `%` and calls the corresponding printing function (e.g., `print_c` for `%c`).
 
-## Funciones principales
+  * Each printing function is responsible for writing the corresponding argument to the standard output and returns the number of characters printed.
 
-El archivo printer.c contiene las funciones encargadas de gestionar cada tipo de formato:
+## Main Functions
 
-* print_c(char arg): Imprime un único carácter y devuelve 1.
+The `printer.c` file contains the functions responsible for handling each format type:
 
-* print_s(char *arg): Imprime una cadena de caracteres. Si el puntero es nulo, imprime (null). Devuelve la longitud de la cadena impresa.
+  * `print_c(char arg)`: Prints a single character and returns 1.
 
-* print_d(int arg, char format): Imprime un número entero con signo (d o i) o sin signo (u), utilizando las funciones auxiliares putnbr_alt y putnbr_alt_u. Devuelve el número de dígitos impresos.
+  * `print_s(char *arg)`: Prints a string of characters. If the pointer is null, it prints `(null)`. Returns the length of the printed string.
 
-* print_x(size_t arg, char format, int count): Imprime un número en formato hexadecimal, ya sea en minúsculas (x), mayúsculas (X) o como parte de un puntero (p). Es una función recursiva que construye el número y devuelve el número de caracteres hexadecimales impresos.
+  * `print_d(int arg, char format)`: Prints a signed (`d` or `i`) or unsigned (`u`) integer, using the helper functions `putnbr_alt` and `putnbr_alt_u`. Returns the number of digits printed.
 
-## Funciones auxiliares
+  * `print_x(size_t arg, char format, int count)`: Prints a number in hexadecimal format, either in lowercase (`x`), uppercase (`X`), or as part of a pointer (`p`). It is a recursive function that builds the number and returns the number of hexadecimal characters printed.
 
-El archivo auxiliars.c contiene las funciones de apoyo para la impresión de números:
+## Helper Functions
 
-* putnbr_alt(int n, int count): Función recursiva que imprime un número entero (int) gestionando correctamente los números negativos y el caso límite INT_MIN. Devuelve el número de caracteres impresos.
+The `auxiliars.c` file contains the helper functions for printing numbers:
 
-* putnbr_alt_u(unsigned int n, int count): Función recursiva que imprime un número entero sin signo (unsigned int). Devuelve el número de caracteres impresos.
+  * `putnbr_alt(int n, int count)`: A recursive function that prints an integer (`int`), correctly handling negative numbers and the edge case `INT_MIN`. Returns the number of characters printed.
 
-## Requisitos
+  * `putnbr_alt_u(unsigned int n, int count)`: A recursive function that prints an unsigned integer (`unsigned int`). Returns the number of characters printed.
 
-Para compilar y utilizar esta librería, necesitarás:
+## Requirements
 
-* Un compilador de C, como gcc.
+To compile and use this library, you will need:
 
-* Las librerías estándar <unistd.h>, <stdlib.h> y <stdarg.h>.
+  * A C compiler, such as `gcc`.
 
-## Instrucciones
-#### 1. Compilar la librería
+  * The standard libraries `<unistd.h>`, `<stdlib.h>`, and `<stdarg.h>`.
 
-Para compilar los archivos y crear la librería libftprintf.a, clona el repositorio, navega hasta su directorio y ejecuta:
+## Instructions
 
-$ make
+#### 1\. Compile the library
 
-#### 2. Limpiar archivos
+To compile the files and create the `libftprintf.a` library, clone the repository, navigate to its directory, and run:
 
-Para eliminar los archivos objeto (.o) generados durante la compilación:
+`$ make`
 
-$ make clean
+#### 2\. Clean files
 
-Para eliminar tanto los archivos objeto como la librería (libftprintf.a):
+To remove the object files (`.o`) generated during compilation:
 
-$ make fclean
+`$ make clean`
 
-Para limpiar todo y recompilar la librería:
+To remove both the object files and the library (`libftprintf.a`):
 
-$ make re
+`$ make fclean`
 
-#### 3. Usar en tu código
+To clean everything and recompile the library:
 
-Para utilizar ft_printf en tus propios proyectos, incluye el archivo de cabecera ft_printf.h y enlaza la librería libftprintf.a durante la compilación.
+`$ make re`
 
-    #include "ft_printf.h"
-    int main(void)
-    {
-        ft_printf("Hola, %s! Tienes %d mensajes.\n", "mundo", 5);    
-        return (0);    
-    }
+#### 3\. Use in your code
+
+To use `ft_printf` in your own projects, include the `ft_printf.h` header file and link the `libftprintf.a` library during compilation.
+
+```
+#include "ft_printf.h"
+int main(void)
+{
+    ft_printf("Hello, %s! You have %d messages.\n", "world", 5);
+    return (0);
+}
+```
