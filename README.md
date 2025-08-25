@@ -1,4 +1,4 @@
-<h1 align="center"\>ft\_printf | 42 School Project\</h1\>
+\<h1 align="center"\>ft\_printf | 42 School Project\</h1\>
 
 This repository contains my implementation of the ft\_printf project from the 42 cursus. The goal is to replicate the behavior of the `printf()` function from the standard C library `stdio.h`.
 
