@@ -10,7 +10,6 @@ This repository contains my implementation of the ft\_printf project from the 42
 	<a href="#requirements">Requirements</a>
 	<span> · </span>
 	<a href="#instructions">Instructions</a>
-	<span> · </span>
 </h2>
 
 ## About
