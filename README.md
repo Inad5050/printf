@@ -3,7 +3,7 @@
 Este repositorio contiene mi implementación del proyecto ft_printf del cursus de 42. El objetivo es replicar el comportamiento de la función printf() de la librería estándar de C stdio.h.
 
 <h2 align="center">
-    <a href="#about">Sobre el proyecto</a>
+    <a href="#sobre-el-proyecto">Sobre el proyecto</a>
     <span> · </span>
     <a href="#índice">Índice</a>
     <span> · </span>
