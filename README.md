@@ -11,6 +11,7 @@ Este repositorio contiene mi implementación del proyecto ft_printf del cursus d
     <span> · </span>
     <a href="#instrucciones">Instrucciones</a>
 </h2>
+
 ## Sobre el proyecto
 
 Este proyecto consiste en crear una librería con una función, ft_printf, que imita el funcionamiento original de printf. No es necesario implementar la gestión del búfer. La función debe manejar los siguientes especificadores de formato:
