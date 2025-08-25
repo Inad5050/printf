@@ -1,93 +1,123 @@
-<h1 align="center">School 42 printf()</h1>
+<h1 align="center">ft_printf | 42 School Project</h1>
 
-This repository contains all files for the __printf__ project from School 42 Málaga cursus. The project consist in duplicate the [`printf()`](https://es.wikipedia.org/wiki/Printf) function, part of the `stdio.h` library.
+Este repositorio contiene mi implementación del proyecto ft_printf del cursus de 42. El objetivo es replicar el comportamiento de la función printf() de la librería estándar de C stdio.h.
 
 <h2 align="center">
-	<a href="#about">About</a>
-	<span> · </span>
-	<a href="#index">Index</a>
-	<span> · </span>
-	<a href="#requirements">Requirements</a>
-	<span> · </span>
-	<a href="#instructions">Instructions</a>
-	<span> · </span>
-	<a href="#testing">Testing</a>
+    <a href="#about">Sobre el proyecto</a>
+    <span> · </span>
+    <a href="#índice">Índice</a>
+    <span> · </span>
+    <a href="#requisitos">Requisitos</a>
+    <span> · </span>
+    <a href="#instrucciones">Instrucciones</a>
 </h2>
+Sobre el proyecto
 
-## About
-This project consists in duplicate the behavior of the C function `printf()`. It is not necessary to implement the buffer management of the original function. It must handle the following parameters:
+Este proyecto consiste en crear una librería con una función, ft_printf, que imita el funcionamiento original de printf. No es necesario implementar la gestión del búfer. La función debe manejar los siguientes especificadores de formato:
 
-- `char` type variables.
-- `string` type variables.
-- `int` type variables.
-- `unsigned int` type variables.
-- hexadecimal `int` type variables (uppercase and lowercase).
-- `pointer` type variables.
+    %c: Para imprimir un solo carácter.
 
-You will find more details in the [subject of the project](https://github.com/PublioElio/School-42-printf/blob/main/printf.es.subject.pdf).
+    %s: Para imprimir una cadena de caracteres.
 
-## Index
-- [Structure](#structure)
-- [Formats](#formats)
-	- [va_list](#va_list)
-	- [Returning an integer](#returning-an-integer)
-- [Auxiliary functions](#auxiliary-functions)
+    %p: Para imprimir la dirección de un puntero en formato hexadecimal.
 
-### Structure
-The main obstacles during the execution of the project have been: handling a variable number of parameters and the function `ft_printf()` returning an `int`.
+    %d: Para imprimir un número decimal (base 10).
 
-#### `va_list`
-To deal with the variable number of parameters entered, the macros `va_list`, `va_start`, `va_arg` and `va_end` have been used. The `ft_printf()` function calls the `ft_fotmat()` function when it finds the `%` sign among the entered parameters, then it checks the next character in the string to call one of the functions that print the different variable types. To use this macro, the libraryt `<stdarg.h>` is included in the `ft_printf.h`.
+    %i: Para imprimir un entero en base 10.
 
-#### Returning an integer
-To handle the integer returned by `ft_printf()`, a pointer is given in the format printing functions. In this way, the function handles the number of characters printed before continuing with the string sent by parameter. Example:
+    %u: Para imprimir un número decimal sin signo (base 10).
 
-```
-void	ft_putchar_pf(char c, size_t *counter)
-{
-	write(1, &c, 1);
-	(*counter)++; // increasing the pointer with each character printed
-}
-```
-### Formats
-The different types of variables are printed using a function for each of the formats:
+    %x: Para imprimir un número en formato hexadecimal (minúsculas).
 
-* [__`ft_putchar_pf()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_putchar_pf.c) prints `char` type variables and is called by each of the following functions to print the character strings one by one. Also, it is where the pointer returned by the `ft_printf()` function is incremented.
-* [__`ft_puthex_pf()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_puthex_pf.c) prints hexadecimal integers,  using a string included in the `ft_printf.h` library. There is one string for uppercase and one for lowercase characters.
-* [__`ft_putnbr_pf()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_putnbr_pf.c) recursively prints an integer, handling the maximum negative value with a conditional (`if-else`) and casting the integer to characters.
-* [__`ft_putptr_pf()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_putptr_pf.c) prints a pointer, in hexadecimal format (lowercase), preceded by the string "0x".
-* [__`ft_putstr_pf()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_putstr_pf.c) prints a `char *` type variable, calling `ft_putchar_pf()` in a `while` loop. It the string is `NULL`, it returns `"(null)"`.
-* [__`ft_putuint_pf()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_putuint_pf.c) prints an `unsigned int` type variable.
+    %X: Para imprimir un número en formato hexadecimal (mayúsculas).
 
-### Auxiliary functions
-[__`ft_aux_pf.c()`__](https://github.com/PublioElio/School-42-printf/blob/main/ft_aux_pf.c) this file contains all the auxiliary functions, specifically the `ft_atoi_base` function, [made during the August pool](https://github.com/PublioElio/School42-Piscina-agosto-2022). This function will be used mainly to change the base in functions that handle hexadecimal numbers and `unsigned int` type variables.
+    %%: Para imprimir el símbolo de porcentaje.
 
-## Requirements
-The functions are written in __C language__ and need the `gcc` compiler, with `<stdlib.h>`, `<stdarg.h>` and `<unistd.h>` standard libraries to run.
+Puedes encontrar más detalles en el enunciado oficial del proyecto.
+Índice
 
-## Instructions
+    Estructura
 
-### 1. Compiling the archives
+    Funciones principales
 
-To compile the proiect, go to its path and run:
+    Funciones auxiliares
 
-For __mandatory__ functions:
-```
+Estructura
+
+El principal desafío del proyecto es la gestión de un número variable de argumentos. Para ello, se han utilizado las macros de la librería <stdarg.h>: va_list, va_start, va_arg y va_end.
+
+El flujo del programa es el siguiente:
+
+    La función ft_printf recorre la cadena de formato.
+
+    Cuando encuentra un carácter %, llama a la función selection.
+
+    selection determina qué tipo de dato se debe imprimir basándose en el carácter que sigue al % y llama a la función de impresión correspondiente (por ejemplo, print_c para %c).
+
+    Cada función de impresión se encarga de escribir el argumento correspondiente en la salida estándar y devuelve el número de caracteres impresos.
+
+Funciones principales
+
+El archivo printer.c contiene las funciones encargadas de gestionar cada tipo de formato:
+
+    print_c(char arg): Imprime un único carácter y devuelve 1.
+
+    print_s(char *arg): Imprime una cadena de caracteres. Si el puntero es nulo, imprime (null). Devuelve la longitud de la cadena impresa.
+
+    print_d(int arg, char format): Imprime un número entero con signo (d o i) o sin signo (u), utilizando las funciones auxiliares putnbr_alt y putnbr_alt_u. Devuelve el número de dígitos impresos.
+
+    print_x(size_t arg, char format, int count): Imprime un número en formato hexadecimal, ya sea en minúsculas (x), mayúsculas (X) o como parte de un puntero (p). Es una función recursiva que construye el número y devuelve el número de caracteres hexadecimales impresos.
+
+Funciones auxiliares
+
+El archivo auxiliars.c contiene las funciones de apoyo para la impresión de números:
+
+    putnbr_alt(int n, int count): Función recursiva que imprime un número entero (int) gestionando correctamente los números negativos y el caso límite INT_MIN. Devuelve el número de caracteres impresos.
+
+    putnbr_alt_u(unsigned int n, int count): Función recursiva que imprime un número entero sin signo (unsigned int). Devuelve el número de caracteres impresos.
+
+Requisitos
+
+Para compilar y utilizar esta librería, necesitarás:
+
+    Un compilador de C, como gcc.
+
+    Las librerías estándar <unistd.h>, <stdlib.h> y <stdarg.h>.
+
+Instrucciones
+1. Compilar la librería
+
+Para compilar los archivos y crear la librería libftprintf.a, clona el repositorio, navega hasta su directorio y ejecuta:
+
 $ make
-```
-### 2. Cleaning all binary (.o) and executable files (.a)
 
-To delete all files generated with make, go to the path and run:
-```
+2. Limpiar archivos
+
+Para eliminar los archivos objeto (.o) generados durante la compilación:
+
+$ make clean
+
+Para eliminar tanto los archivos objeto como la librería (libftprintf.a):
+
 $ make fclean
-```
 
-### 3. Using it in your code
+Para limpiar todo y recompilar la librería:
 
-To use this project in your code, simply include this header:
-```
+$ make re
+
+3. Usar en tu código
+
+Para utilizar ft_printf en tus propios proyectos, incluye el archivo de cabecera ft_printf.h y enlaza la librería libftprintf.a durante la compilación.
+
 #include "ft_printf.h"
-```
 
-## Testing
-This function have been tested with [Francinette](https://github.com/xicodomingues/francinette).
+int main(void)
+{
+    ft_printf("Hola, %s! Tienes %d mensajes.\n", "mundo", 5);
+    return (0);
+}
+
+Compilación de ejemplo:
+
+$ gcc tu_archivo.c -L. -lftprintf
+
